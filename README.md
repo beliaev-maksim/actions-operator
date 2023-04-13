@@ -1,7 +1,6 @@
 # actions-operator
 
 Action for easily testing Operator Charms with Juju.
-
 ## Usage
 
 Simply include the action as a step in your Workflow:
