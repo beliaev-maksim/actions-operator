@@ -5647,13 +5647,17 @@ function run() {
                 else {
                     yield snap("install microk8s --classic");
                 }
+                core.endGroup();
+                core.startGroup("Update registry");
                 const file_name = "/var/snap/microk8s/current/args/certs.d/docker.io/hosts.toml";
-                yield exec.exec("sudo", ["echo", "server = \"https://rocks.canonical.com\"", ">", file_name]);
-                yield exec.exec("sudo", ["echo", "[host.\"https://rocks.canonical.com\"]", ">>", file_name]);
-                yield exec.exec("sudo", ["echo", "capabilities = [\"pull\", \"resolve\"]", ">>", file_name]);
-                yield exec.exec("sudo", ["microk8s", "stop"]);
-                yield exec.exec("sudo", ["microk8s", "start"]);
+                yield exec.exec("sudo", ["bash", "-c", "cat", ">", file_name, "<< EOL", 'server = "https://rocks.canonical.com"\n[host."https://rocks.canonical.com"]\ncapabilities = ["pull", "resolve"]EOL']);
                 yield exec.exec("sudo", ["cat", file_name]);
+                // await exec.exec("sudo", ["echo", "server = \"https://rocks.canonical.com\"", ">", file_name]);
+                // await exec.exec("sudo", ["echo", "[host.\"https://rocks.canonical.com\"]", ">>", file_name]);
+                // await exec.exec("sudo", ["echo", "capabilities = [\"pull\", \"resolve\"]", ">>", file_name]);
+                // await exec.exec("sudo", ["microk8s", "stop"]);
+                // await exec.exec("sudo", ["microk8s", "start"]);
+                // await exec.exec("sudo", ["cat", file_name]);
                 core.endGroup();
                 core.startGroup("Initialize microk8s");
                 yield exec.exec('bash', ['-c', `sudo usermod -a -G ${microk8s_group} $USER`]);
