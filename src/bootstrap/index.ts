@@ -224,9 +224,9 @@ async function run() {
             // await exec.exec("sudo", ["echo", "server = \"https://rocks.canonical.com\"", ">", file_name]);
             // await exec.exec("sudo", ["echo", "[host.\"https://rocks.canonical.com\"]", ">>", file_name]);
             // await exec.exec("sudo", ["echo", "capabilities = [\"pull\", \"resolve\"]", ">>", file_name]);
-            // await exec.exec("sudo", ["microk8s", "stop"]);
-            // await exec.exec("sudo", ["microk8s", "start"]);
-            // await exec.exec("sudo", ["cat", file_name]);
+            await exec.exec("sudo", ["microk8s", "stop"]);
+            await exec.exec("sudo", ["microk8s", "start"]);
+            await exec.exec("sudo", ["cat", file_name]);
             core.endGroup();
 
             core.startGroup("Initialize microk8s");
