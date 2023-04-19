@@ -5654,6 +5654,8 @@ server = "https://docker.io"
   capabilities = ["pull", "resolve"]
 EOF`;
                 yield exec.exec("bash", ["-c", command]);
+                yield exec.exec("microk8s", ["stop"]);
+                yield exec.exec("microk8s", ["start"]);
                 core.endGroup();
                 core.startGroup("Initialize microk8s");
                 yield exec.exec('bash', ['-c', `sudo usermod -a -G ${microk8s_group} $USER`]);

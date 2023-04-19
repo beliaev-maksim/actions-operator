@@ -222,6 +222,8 @@ server = "https://docker.io"
   capabilities = ["pull", "resolve"]
 EOF`;
             await exec.exec("bash", ["-c", command]);
+            await exec.exec("microk8s", ["stop"]);
+            await exec.exec("microk8s", ["start"]);
             core.endGroup();
             core.startGroup("Initialize microk8s");
             await exec.exec('bash', ['-c', `sudo usermod -a -G ${microk8s_group} $USER`]);
