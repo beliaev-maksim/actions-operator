@@ -5647,13 +5647,13 @@ function run() {
                 else {
                     yield snap("install microk8s --classic");
                 }
-                const command = `sudo cat <<EOF >/var/snap/microk8s/current/args/certs.d/docker.io/hosts.toml
+                const command = `cat <<EOF >/var/snap/microk8s/current/args/certs.d/docker.io/hosts.toml
 server = "https://docker.io"
 
 [host."https://registry-1.docker.io"]
   capabilities = ["pull", "resolve"]
 EOF`;
-                yield exec.exec("bash", ["-c", command]);
+                yield exec.exec("sudo", [command]);
                 yield exec.exec("microk8s", ["stop"]);
                 yield exec.exec("microk8s", ["start"]);
                 core.endGroup();
