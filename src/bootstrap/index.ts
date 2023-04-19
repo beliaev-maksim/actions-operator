@@ -215,13 +215,13 @@ async function run() {
             } else {
                 await snap("install microk8s --classic");
             }
-            const command = `sudo cat <<EOF >/var/snap/microk8s/current/args/certs.d/docker.io/hosts.toml
+            const command = `cat <<EOF >/var/snap/microk8s/current/args/certs.d/docker.io/hosts.toml
 server = "https://docker.io"
 
 [host."https://registry-1.docker.io"]
   capabilities = ["pull", "resolve"]
 EOF`;
-            await exec.exec("bash", ["-c", command]);
+            await exec.exec("sudo", [command]);
             await exec.exec("microk8s", ["stop"]);
             await exec.exec("microk8s", ["start"]);
             core.endGroup();
