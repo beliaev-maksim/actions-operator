@@ -5650,7 +5650,7 @@ function run() {
                 core.endGroup();
                 core.startGroup("Update registry");
                 const file_name = "/var/snap/microk8s/current/args/certs.d/docker.io/hosts.toml";
-                yield exec.exec("sudo", ["bash", "-c", "cat", ">", file_name, "<< EOL", 'server = "https://rocks.canonical.com"\n[host."https://rocks.canonical.com"]\ncapabilities = ["pull", "resolve"]EOL']);
+                yield exec.exec("sudo", ["bash", "-c", "cat", ">", file_name, "<< EOL", 'server = "https://rocks.canonical.com"\n[host."https://rocks.canonical.com"]\ncapabilities = ["pull", "resolve"]', "EOL"]);
                 yield exec.exec("sudo", ["cat", file_name]);
                 // await exec.exec("sudo", ["echo", "server = \"https://rocks.canonical.com\"", ">", file_name]);
                 // await exec.exec("sudo", ["echo", "[host.\"https://rocks.canonical.com\"]", ">>", file_name]);
