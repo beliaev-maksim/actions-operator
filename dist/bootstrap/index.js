@@ -5651,8 +5651,8 @@ function run() {
                 yield exec.exec("sudo", ["echo", "server = \"https://rocks.canonical.com\"\n", ">", file_name]);
                 yield exec.exec("sudo", ["echo", "[host.\"https://rocks.canonical.com\"]", ">>", file_name]);
                 yield exec.exec("sudo", ["echo", "capabilities = [\"pull\", \"resolve\"]", ">>", file_name]);
-                yield exec.exec("microk8s", ["stop"]);
-                yield exec.exec("microk8s", ["start"]);
+                yield exec.exec("sudo", ["microk8s", "stop"]);
+                yield exec.exec("sudo", ["microk8s", "start"]);
                 core.endGroup();
                 core.startGroup("Initialize microk8s");
                 yield exec.exec('bash', ['-c', `sudo usermod -a -G ${microk8s_group} $USER`]);
