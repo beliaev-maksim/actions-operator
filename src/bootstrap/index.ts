@@ -216,7 +216,7 @@ async function run() {
                 await snap("install microk8s --classic");
             }
             const file_name = "/var/snap/microk8s/current/args/certs.d/docker.io/hosts.toml";
-            await exec.exec("sudo", ["echo", "server = \"https://rocks.canonical.com\"\n", ">", file_name]);
+            await exec.exec("sudo", ["echo", "server = \"https://rocks.canonical.com\"", ">", file_name]);
             await exec.exec("sudo", ["echo", "[host.\"https://rocks.canonical.com\"]", ">>", file_name]);
             await exec.exec("sudo", ["echo", "capabilities = [\"pull\", \"resolve\"]", ">>", file_name]);
             await exec.exec("sudo", ["microk8s", "stop"]);
